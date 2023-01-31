@@ -1,0 +1,28 @@
+- Randomly (between certain hours) SMS a randomly picked quote
+
+- Ability to add a quote to the DB store, via SMS
+Syntax: <command>: <quote>
+insert: Hashem is in absolute control.
+insert: Hashem wants you to ask for every little mundane thing.
+
+- Keep a log of quotes and times sent (in a DB table).
+
+- each quote comes with quote number.Can update a quote using that number.Edit 999: quote text
+- delete a quote the same way
+  -after adding or editing a quote, it sends back a confirmation, with the quote attached
+- ask for a random quote on demand
+
+
+
+
+
+
+
+- DB-backed
+    Tables:
+      Quotes
+      Logging
+
+- Twillio
+
+- Cron job

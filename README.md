@@ -1,1 +1,1 @@
-#SMS Quotes App
+# SMS Quotes App

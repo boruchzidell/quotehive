@@ -1,19 +1,28 @@
-- Randomly (between certain hours) SMS a randomly picked quote
+- Randomly (between certain hours) SMS a randomly picked quote.
 
 - Ability to add a quote to the DB store, via SMS
-Syntax: <command>: <quote>
-insert: Hashem is in absolute control.
-insert: Hashem wants you to ask for every little mundane thing.
+    Syntax: <command>: <quote>
+    insert: quantity before quality.
 
-- Keep a log of quotes and times sent (in a DB table).
 
-- each quote comes with quote number.Can update a quote using that number.Edit 999: quote text
+
+- each quote comes with quote number.Can update a quote using that number.
+  `Edit 999: quote text`
+
 - delete a quote the same way
-  -after adding or editing a quote, it sends back a confirmation, with the quote attached
-- ask for a random quote on demand
 
+- after adding or editing a quote, it sends back a confirmation, with the quote attached
 
+- ask for a random quote on demand:
+  `random`
 
+- front end dashboard to manage quotes:
+  - add quotes
+  - see all quotes
+  - edit quotes
+  - delete quotes
+  - see sent quotes
+  - set the time to send
 
 
 
@@ -23,6 +32,17 @@ insert: Hashem wants you to ask for every little mundane thing.
       Quotes
       Logging
 
-- Twillio
+- Twilio
 
 - Cron job
+
+- Keep a log of quotes and times sent (in a DB table).
+
+
+
+
+
+--------------------------------
+Future:
+  - add ability for users and authentication
+    - how would this work with cron?

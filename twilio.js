@@ -6,7 +6,7 @@ const client = require('twilio')(accountSid, authToken);
 let counter = 1;
 client.messages
   .create({
-    body: `Test ${counter++}`,
+    body: `Test 4`,
     from: '+15166143125',
     to: '+19173256872',
   })

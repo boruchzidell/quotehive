@@ -1,4 +1,4 @@
-- Randomly (between certain hours) SMS a randomly picked quote.
+- SMS a randomly picked quote on a set schedule
 
 - Ability to add a quote to the DB store, via SMS
     Syntax: <command>: <quote>
@@ -38,7 +38,11 @@
 
 - Keep a log of quotes and times sent (in a DB table).
 
-
+-------------------------------
+Challenges:
+- Find a hosting provider that runs 24/7
+- make the scheduler / cron user friendly (find a scheduler module?)
+-
 
 
 
@@ -46,3 +50,4 @@
 Future:
   - add ability for users and authentication
     - how would this work with cron?
+    - tables? filter by logged in user?

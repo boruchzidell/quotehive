@@ -5,11 +5,8 @@
 ## Links
 
 - [Repo](https://github.com/boruchzidell/sms_quotes '<project-name> Repo')
-
 - [Live](<Homepage url> 'Live View')
-
 - [Bugs](https://github.com/boruchzidell/sms_quotes/issues 'Issues Page')
-
 - [API](<API Link> 'API')
 
 ## Screenshots

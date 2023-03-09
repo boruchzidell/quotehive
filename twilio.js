@@ -1,20 +1,21 @@
 #! /usr/bin/env node
 
-// const accountSid = 'AC4af4b584d9448a96530003bd48a39e9b';
+const accountSid = 'AC4af4b584d9448a96530003bd48a39e9b';
+const authToken = 'b8ae412e67535b0673a6bd9b4c76bbc3';
 // const apiKey = 'SK987132a05105078ea3a697ac12095e42';
 // const apiSecret = 'AjDaA9xfNBWoVn9roNphcERdmiMaoDz0';
-// const authToken = 'b8ae412e67535b0673a6bd9b4c76bbc3';
 
 // const client = require('twilio')(accountSid, authToken);
-require('dotenv').config();
+// require('dotenv').config();
 
 // console.log(process.env.)
+// require('dotenv').config();
 
-const client = require('twilio')();
+const client = require('twilio')(process.env.TWILIO_ACCOUNT_SID, process.env.TWILIO_AUTH_TOKEN);
 
 client.messages
   .create({
-    body: `test`,
+    body: `testing 1 2 3`,
     from: '+15166143125',
     to: '+19173256872',
   })

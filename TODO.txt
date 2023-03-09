@@ -5,8 +5,10 @@
     insert: quantity before quality.
 
 
+make this into an API?
 
-- each quote comes with quote number.Can update a quote using that number.
+
+- each quote comes with quote number. Can update a quote using that number.
   `Edit 999: quote text`
 
 - delete a quote the same way

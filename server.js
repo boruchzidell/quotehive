@@ -1,15 +1,26 @@
 let express = require('express');
-
-let {MessagingResponse} = require('twilio').twiml;
-
 let app = express();
+require('dotenv').config();
 
 app.use(express.urlencoded({extended: true}));
 
+let {MessagingResponse} = require('twilio').twiml;
+
+const client = require('twilio')(process.env.TWILIO_ACCOUNT_SID, process.env.TWILIO_AUTH_TOKEN);
+
+client.messages
+  .create({
+    body: `testing 1 2 3`,
+    from: '+15166143125',
+    to: '+19173256872',
+  })
+  .then((message) => console.log(message.sid));
+
 app.post('/sms', (req, res, next) => {
+  let incomingSms = req.body.Body;
   let smsResponse;
 
-  switch (req.body.Body) {
+  switch (incomingSms) {
     case 'A':
       smsResponse = 'One';
       break;
@@ -24,9 +35,10 @@ app.post('/sms', (req, res, next) => {
 
   twiml.message(smsResponse);
 
-  res.type('text/xml').send(twiml.toString());
+  res.type('text/xml');
+  res.send(twiml.toString());
 });
 
-let port = 3000;
+let port = process.env.PORT || 5000;
 
-app.listen(port, () => console.log(`App is listening on port: ${port}`));
+app.listen(port, () => console.log(`SMS Quotes app listening on port: ${port}`));

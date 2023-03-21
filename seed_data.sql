@@ -1,16 +1,18 @@
+-- create database sms_quotes
+
 drop table if exists quotes cascade;
 drop table if exists logging;
 
 create table quotes (
   id serial primary key,
   quote varchar(2048) not null,
-  create_date text default to_char(current_timestamp(0), 'YYYY-MM-DD HH12:MI:SS am')
+  create_date text default to_char(timezone('America/New_York', current_timestamp(0)), 'YYYY-MM-DD HH12:MI:SS am')
 );
 
 create table logging (
   id serial primary key,
   quote_id integer,
-  sent_date text default to_char(current_timestamp(0), 'YYYY-MM-DD HH12:MI:SS am'),
+  sent_date text default to_char(timezone('America/New_York', current_timestamp(0)), 'YYYY-MM-DD HH12:MI:SS am'),
 
   foreign key(quote_id) references quotes(id) on delete set null
 );

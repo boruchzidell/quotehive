@@ -1,19 +1,76 @@
-- SMS a randomly picked quote on a set schedule
+Next step:
+  - create js file to connect to database
+  - import that into relevant files
+  - verify working
+  -
+
+
+
+
+
+---------------------------------------------------------
+Architecture:
+- cron job runs the twilio.js file. It's standalone.
+
+- to interact via SMS, need just one route /sms :
+  - parses message
+  - forward on to proper CRUD route
+
+- API          /v1
+  C:      post    /quotes
+  R all:  get     /quotes
+  R:      get     /quotes/:id
+  U:      put     /quotes/:id
+  D:      delete  /quotes/:id
+
+- front-end
+  - completely standalone - main functionality is BE
+  - makes calls to API
+
+
+- Response depends on client (make a conditional in route handlers):
+  webhook:     has x-twilio-signature
+    API response:
+    C:        quote and id
+    R all:    n/a
+    R:        quote and id
+    U:        quote and id
+    D:        quote and id
+
+
+  http request (FE):
+    API response:
+    C:        n/a (201)
+    R all:    all quotes
+    R:        n/a
+    U:        n/a (204 No Content)
+    D:        n/a (204 No Content)
+
+
+- create a middleware to set a variable which indicates which client is making request?
+
+
+--------------------------------------------------------
+
+Issues:
+  - on FE, how edit a quote?
+  - SPA or hybrid?
 
 - Ability to add a quote to the DB store, via SMS
     Syntax: <command>: <quote>
     insert: quantity before quality.
 
 
-make this into an API?
 
 
-- each quote comes with quote number. Can update a quote using that number.
-  `Edit 999: quote text`
+- when sending out quote, include its id on the bottom (for editing or deleting).
+
+- each quote comes with quote number (primary key). Can update a quote using that number.
+  `Edit 999: updated quote text`
 
 - delete a quote the same way
 
-- after adding or editing a quote, it sends back a confirmation, with the quote attached
+- after adding, editing or deleting a quote, it sends back a confirmation, with the quote attached
 
 - ask for a random quote on demand:
   `random`
@@ -25,24 +82,24 @@ make this into an API?
   - delete quotes
   - see sent quotes
   - set the time to send
+  - turn the service on or off
+  -
+
+
+- on FE, implement search feature (updates page as you type).
 
 
 
-
-- DB-backed
-    Tables:
+- DB Tables:
       Quotes
       Logging
 
-- Twilio
-
 - Cron job
 
-- Keep a log of quotes and times sent (in a DB table).
+- integrate hebrew calendar?
 
 -------------------------------
 Challenges:
-- Find a hosting provider that runs 24/7
 - make the scheduler / cron user friendly (find a scheduler module?)
 -
 

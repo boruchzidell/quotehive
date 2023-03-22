@@ -16,28 +16,28 @@ client.messages
   })
   .then((message) => console.log(message.sid));
 
-app.post('/sms', (req, res, next) => {
-  let incomingSms = req.body.Body;
-  let smsResponse;
+// app.post('/sms', (req, res, next) => {
+//   let incomingSms = req.body.Body;
+//   let smsResponse;
 
-  switch (incomingSms) {
-    case 'A':
-      smsResponse = 'One';
-      break;
-    case 'B':
-      smsResponse = 'Two';
-      break;
-    default:
-      smsResponse = 'Not exist';
-  }
+//   switch (incomingSms) {
+//     case 'A':
+//       smsResponse = 'One';
+//       break;
+//     case 'B':
+//       smsResponse = 'Two';
+//       break;
+//     default:
+//       smsResponse = 'Not exist';
+//   }
 
-  let twiml = new MessagingResponse();
+//   let twiml = new MessagingResponse();
 
-  twiml.message(smsResponse);
+//   twiml.message(smsResponse);
 
-  res.type('text/xml');
-  res.send(twiml.toString());
-});
+//   res.type('text/xml');
+//   res.send(twiml.toString());
+// });
 
 let port = process.env.PORT || 5000;
 

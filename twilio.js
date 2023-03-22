@@ -5,29 +5,32 @@ const authToken = 'b8ae412e67535b0673a6bd9b4c76bbc3';
 // const apiKey = 'SK987132a05105078ea3a697ac12095e42';
 // const apiSecret = 'AjDaA9xfNBWoVn9roNphcERdmiMaoDz0';
 
-// const client = require('twilio')(accountSid, authToken);
-// require('dotenv').config();
+require('dotenv').config();
 
-// console.log(process.env.)
-// require('dotenv').config();
+const {pool} = require('./db');
 
 const client = require('twilio')(process.env.TWILIO_ACCOUNT_SID, process.env.TWILIO_AUTH_TOKEN);
 
-client.messages
-  .create({
-    body: `testing 1 2 3`,
-    from: '+15166143125',
-    to: '+19173256872',
+// pool.query('select * from quotes', [], (err, results) => {
+//   let res = results.rows[0].quote;
+
+//   client.messages
+//     .create({
+//       body: res,
+//       from: '+15166143125',
+//       to: '+19173256872',
+//     })
+//     .then((message) => console.log(message.sid));
+// });
+
+pool
+  .query('select * from quotes')
+  .then((results) => results.rows[0].quote)
+  .then((quote) => {
+    return client.messages.create({
+      body: quote,
+      from: '+15166143125',
+      to: '+19173256872',
+    });
   })
-  .then((message) => console.log(message.sid));
-
-// client
-//   .messages('SM1f3e4c9f4e1431e5b5266af5a53399a3')
-//   .fetch()
-//   .then((message) => console.log(message.status));
-
-// curl -X POST "https://api.twilio.com/2010-04-01/Accounts/AC4af4b584d9448a96530003bd48a39e9b/Messages.json" \
-// --data-urlencode "Body=Hi from curl" \
-// --data-urlencode "From=+15166143125" \
-// --data-urlencode "To=+19173256872" \
-// -u AC4af4b584d9448a96530003bd48a39e9b:b8ae412e67535b0673a6bd9b4c76bbc3
+  .catch((err) => console.log(err));

@@ -23,8 +23,10 @@ async function getQuote() {
 
   let maxQuoteNumber = await pool
     .query(rowCount)
-    .then((results) => results.rows[0].rowcount)
+    .then((results) => +results.rows[0].rowcount) // coerced to integer
     .catch((err) => console.error('Error! : ', err.stack));
+
+  if (!maxQuoteNumber) return;
 
   let quoteSql = `
     select quote from
@@ -34,10 +36,13 @@ async function getQuote() {
 
   return await pool
     .query(quoteSql, [generateRandomNumber(maxQuoteNumber)])
-    .then((results) => results.rows[0].quote);
+    .then((results) => results.rows[0].quote)
+    .catch((err) => console.log(err.stack));
 }
 
 async function sendText(text, toNumber) {
+  if (!text) return;
+
   return await twilioClient.messages.create({
     body: text,
     from: process.env.TWILIO_NUMBER,

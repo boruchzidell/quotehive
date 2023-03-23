@@ -37,12 +37,17 @@ TODO: put SMS instructions here
 - <code>node-cron</code> package
 - Twilio messaging service
 
-## Technical Notes
+## Technical Notes and Decisions
 
 - architecture notes
 - ERD diagram
 - content negotiation depending on whether the request was via Twilio webhook or a plain HTTP request to the API.
--
+
+Two ways to pick a random quote:
+
+1. Using JS. This would result in querying the database twice, once to get the max number of records in the quotes table (for the upper bound of randomness), and using that to query for the actual quote. This is the route I went with, as it keeps the business logic contained in the code.
+
+2. Develop a `Postgres user-defined function` to generate the random number, and use that to retrieve the quote. Even though this seems to be the more efficient way (there's only one query), it means mixing business logic into the database layer, which I wanted to avoid.
 
 ## Future Updates
 

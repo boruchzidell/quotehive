@@ -1,53 +1,41 @@
 #! /usr/bin/env node
 
-const accountSid = 'AC4af4b584d9448a96530003bd48a39e9b';
-const authToken = 'b8ae412e67535b0673a6bd9b4c76bbc3';
-
-const recipientNumber = '+19173256872';
-// const apiKey = 'SK987132a05105078ea3a697ac12095e42';
-// const apiSecret = 'AjDaA9xfNBWoVn9roNphcERdmiMaoDz0';
-
 require('dotenv').config();
 
-const {pool} = require('./db');
+const recipientNumber = '+19173256872';
 
-const twilioClient = require('twilio')(process.env.TWILIO_ACCOUNT_SID, process.env.TWILIO_AUTH_TOKEN);
+const accountSid = process.env.TWILIO_ACCOUNT_SID;
+const apiKey = process.env.TWILIO_API_KEY;
+const apiSecret = process.env.TWILIO_API_SECRET;
 
-// pool.query('select * from quotes', [], (err, results) => {
-//   let res = results.rows[0].quote;
+const twilioClient = require('twilio')(apiKey, apiSecret, { accountSid: accountSid });
 
-//   client.messages
-//     .create({
-//       body: res,
-//       from: '+15166143125',
-//       to: '+19173256872',
-//     })
-//     .then((message) => console.log(message.sid));
-// });
+const { pool } = require('./db');
+
 function generateRandomNumber(max) {
-  return Math.floor(Math.random() * max) + 1;
+  return Math.floor(Math.random() * max) + 1; // includes max
 }
 
 async function getQuote() {
-  let getMaxSql = `
-    select row_number() over () rownum
-    from quotes q
-    order by rownum desc limit 1`;
+  let rowCount = `
+    select count(*) rowCount from quotes
+  `;
 
   let maxQuoteNumber = await pool
-    .query(getMaxSql)
-    .then((results) => results.rows[0].rownum)
-    .catch((err) => console.log(err.stack));
+    .query(rowCount)
+    .then((results) => results.rows[0].rowcount)
+    .catch((err) => console.error('Error! : ', err.stack));
 
   let quoteSql = `
     select quote from
-      (select quote, row_number() over () rownum from quotes q ) t
-    where rownum = $1`;
+      (select quote, row_number() over () rownum from quotes) t1
+    where rownum = $1
+  `;
 
-  return await pool.query(quoteSql, [generateRandomNumber(maxQuoteNumber)]);
+  return await pool
+    .query(quoteSql, [generateRandomNumber(maxQuoteNumber)])
+    .then((results) => results.rows[0].quote);
 }
-
-getQuote();
 
 async function sendText(text, toNumber) {
   return await twilioClient.messages.create({
@@ -58,7 +46,6 @@ async function sendText(text, toNumber) {
 }
 
 getQuote()
-  .then((results) => results.rows[0].quote)
   .then((quote) => sendText(quote))
   .then((message) => console.log(message.sid))
   .catch((err) => console.log(err.stack));

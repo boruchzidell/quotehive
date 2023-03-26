@@ -1,15 +1,7 @@
 let cron = require('node-cron');
 
-let { getQuote } = require('./twilio');
-
-console.log('before');
+let { getAndSendQuote } = require('./twilio');
 
 cron.schedule('* * * * *', () => {
-  console.log('running task');
-  getQuote();
-  console.log('inside');
+  getAndSendQuote();
 });
-
-console.log('after');
-
-in main

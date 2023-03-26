@@ -50,7 +50,16 @@ async function sendText(text, toNumber) {
   });
 }
 
-getQuote()
-  .then((quote) => sendText(quote))
-  .then((message) => console.log(message.sid))
-  .catch((err) => console.log(err.stack));
+async function getAndSendQuote() {
+  try {
+    let quote = await getQuote();
+    let twilioConfirmation = await sendText(quote);
+    console.log(twilioConfirmation.sid);
+  } catch (err) {
+    console.log(err.stack);
+  }
+}
+
+module.exports = {
+  getAndSendQuote,
+};

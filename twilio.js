@@ -46,7 +46,7 @@ async function sendText(text, toNumber) {
   return await twilioClient.messages.create({
     body: text,
     from: process.env.TWILIO_NUMBER,
-    to: recipientNumber,
+    to: toNumber || recipientNumber,
   });
 }
 

@@ -1,10 +1,10 @@
 Next step:
-  - create js file to connect to database
-  - import that into relevant files
-  - verify working
-  -
+  - cron
 
-- how
+CHECKOUT A GIT BRANCH
+
+
+
 
 
 
@@ -94,14 +94,13 @@ Issues:
       Quotes
       Logging
 
-- Cron job
 
 - integrate hebrew calendar?
 
 -------------------------------
 Challenges:
 - make the scheduler / cron user friendly (find a scheduler module?)
--
+- how add a new recipient phone number
 
 
 
@@ -110,3 +109,4 @@ Future:
   - add ability for users and authentication
     - how would this work with cron?
     - tables? filter by logged in user?
+    - add option to text pictures (eg screenshots)? either store actual image or link to image (requires hosting images somewhere)

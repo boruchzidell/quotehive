@@ -1,16 +1,9 @@
 #! /usr/bin/env node
 
-require('dotenv').config();
-
 const recipientNumber = '+19173256872';
 
-const accountSid = process.env.TWILIO_ACCOUNT_SID;
-const apiKey = process.env.TWILIO_API_KEY;
-const apiSecret = process.env.TWILIO_API_SECRET;
-
-const twilioClient = require('twilio')(apiKey, apiSecret, { accountSid: accountSid });
-
 const { pool } = require('./db');
+const { createTwilioMessage } = require('./twilioClient');
 
 function generateRandomNumber(max) {
   return Math.floor(Math.random() * max) + 1; // includes max
@@ -40,20 +33,10 @@ async function getQuote() {
     .catch((err) => console.log(err.stack));
 }
 
-async function sendText(text, toNumber) {
-  if (!text) return;
-
-  return await twilioClient.messages.create({
-    body: text,
-    from: process.env.TWILIO_NUMBER,
-    to: toNumber || recipientNumber,
-  });
-}
-
 async function getAndSendQuote() {
   try {
     let quote = await getQuote();
-    let twilioConfirmation = await sendText(quote);
+    let twilioConfirmation = await createTwilioMessage(quote, recipientNumber);
     console.log(twilioConfirmation.sid);
   } catch (err) {
     console.log(err.stack);

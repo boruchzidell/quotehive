@@ -1,6 +1,8 @@
 #! /usr/bin/env node
 
-const recipientNumber = '+19173256872';
+require('dotenv').config();
+
+const recipientNumber = process.env.TWILIO_TO_NUMBER;
 
 const { pool } = require('./db');
 const { createTwilioMessage } = require('./twilioClient');

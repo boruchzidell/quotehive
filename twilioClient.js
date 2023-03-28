@@ -11,7 +11,7 @@ async function createTwilioMessage(text, toNumber) {
 
   return await twilioClient.messages.create({
     body: text,
-    from: process.env.TWILIO_NUMBER,
+    from: process.env.TWILIO_FROM_NUMBER,
     to: toNumber,
   });
 }

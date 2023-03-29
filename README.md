@@ -1,4 +1,4 @@
-<h1 align="center">SMS Quotes App</h1>
+<h1 align="center">QuoteHive</h1>
 
 ## Description
 

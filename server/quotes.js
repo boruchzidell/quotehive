@@ -25,8 +25,8 @@ async function getQuote() {
   if (!maxQuoteNumber) return;
 
   let quoteSql = `
-    select quote from
-      (select quote, row_number() over () rownum from quotes) t1
+    select id, quote from
+      (select id, quote, row_number() over () rownum from quotes) t1
     where rownum = $1
   `;
 
@@ -45,7 +45,6 @@ async function getAndSendQuote() {
     console.log(err.stack);
   }
 }
-getAndSendQuote();
 
 module.exports = {
   getAndSendQuote,

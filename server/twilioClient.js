@@ -1,4 +1,7 @@
-require('dotenv').config();
+// require('dotenv').config({ path: '../.env' });
+
+let path = require('path');
+require('dotenv').config({ path: path.resolve(__dirname, '../../.env') });
 
 const accountSid = process.env.TWILIO_ACCOUNT_SID;
 const apiKey = process.env.TWILIO_API_KEY;

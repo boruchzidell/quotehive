@@ -1,7 +1,10 @@
 let express = require('express');
 let app = express();
 let { MessagingResponse } = require('twilio').twiml;
-require('dotenv').config();
+require('dotenv').config({ path: '../.env' });
+
+let path = require('path');
+require('dotenv').config({ path: path.resolve(__dirname, '../.env') });
 
 app.use(express.urlencoded({ extended: true }));
 

@@ -1,6 +1,7 @@
 #! /usr/bin/env node
 
-require('dotenv').config();
+let path = require('path');
+require('dotenv').config({ path: path.resolve(__dirname, '../../.env') });
 
 const recipientNumber = process.env.TWILIO_TO_NUMBER;
 

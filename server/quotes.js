@@ -1,8 +1,5 @@
 #! /usr/bin/env node
 
-let path = require('path');
-require('dotenv').config({ path: path.resolve(__dirname, '../../.env') });
-
 const recipientNumber = process.env.TWILIO_TO_NUMBER;
 
 const { pool } = require('./db');
@@ -40,7 +37,7 @@ async function getAndSendQuote() {
   try {
     let quote = await getQuote();
     let twilioConfirmation = await createTwilioMessage(quote, recipientNumber);
-    console.log(twilioConfirmation.sid);
+    console.log(twilioConfirmation.sid, twilioConfirmation.body);
   } catch (err) {
     console.log(err.stack);
   }

@@ -1,7 +1,4 @@
 let cron = require('node-cron');
+let { getAndSendQuote } = require('./quotes');
 
-let { getAndSendQuote } = require('./twilio');
-
-cron.schedule('* * * * *', () => {
-  getAndSendQuote();
-});
+cron.schedule('* * * * *', getAndSendQuote, { timezone: 'America/New_york' });

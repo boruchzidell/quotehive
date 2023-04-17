@@ -1,7 +1,5 @@
-// require('dotenv').config({ path: '../.env' });
-
 let path = require('path');
-require('dotenv').config({ path: path.resolve(__dirname, '../../.env') });
+require('dotenv').config({ path: path.resolve(__dirname, '../.env') });
 
 const accountSid = process.env.TWILIO_ACCOUNT_SID;
 const apiKey = process.env.TWILIO_API_KEY;
@@ -15,7 +13,7 @@ async function createTwilioMessage(text, toNumber) {
   return await twilioClient.messages.create({
     body: text,
     from: process.env.TWILIO_FROM_NUMBER,
-    to: toNumber,
+    to: process.env.TWILIO_TO_NUMBER || toNumber,
   });
 }
 

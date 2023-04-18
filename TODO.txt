@@ -1,7 +1,4 @@
 Next step:
-  - test env variables
-
-
   - both cron and webserver have to be running
 
 

@@ -18,7 +18,7 @@ TODO: put SMS instructions here
 ## Links
 
 - [Repo](https://github.com/boruchzidell/sms_quotes '<project-name> Repo')
-- [Live site](<Homepage url> 'Live site')
+- [Live site](<Homepage url> 'Live site coming soon')
 - [Bugs](https://github.com/boruchzidell/sms_quotes/issues 'Issues Page')
 - [API](<API Link> 'API')
 

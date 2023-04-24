@@ -23,7 +23,7 @@ TODO: put SMS instructions here
 
 ## Screenshots
 
-![Home Page](/screenshots/1.png 'Home Page')
+![Home Page](/screenshots/1.png 'Home Page coming soon')
 
 ![](/screenshots/2.png)
 

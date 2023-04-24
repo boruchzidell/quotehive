@@ -1,6 +1,5 @@
 Next step:
-  - both cron and webserver have to be running
-
+  -
 
 CHECKOUT A GIT BRANCH
 
@@ -8,6 +7,7 @@ CHECKOUT A GIT BRANCH
 ---------------------------------------------------------
 Architecture:
 - cron job runs the twilio.js file. It's standalone.
+  this is incorrect - fix.
 
 - to interact via SMS, need just one route /sms :
   - parses message

@@ -38,6 +38,8 @@ TODO: put SMS instructions here
 
 ## Technical Notes and Decisions
 
+// Some of this is outdated. Needs to be fixed.
+
 - architecture notes
 - ERD diagram
 - content negotiation depending on whether the request was via Twilio webhook or a plain HTTP request to the API.

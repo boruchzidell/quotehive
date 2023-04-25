@@ -53,6 +53,7 @@ Two ways to pick a random quote:
 ## Future Updates
 
 - [ ] Authentication and login
+- [ ] Integrate Hebcal to restrict which days it runs
 - [ ] Requirement to register number on app (to prevent spam abuse)
 - [ ] &nbsp;
 
